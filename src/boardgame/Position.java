@@ -2,10 +2,8 @@ package boardgame;
 
 public class Position {
 	
-	private int row = 0;
-	private int column = 0;
-	
-	public Position() {}
+	private int row;
+	private int column;
 	
 	public Position(int row, int column) {
 		this.row = row;
@@ -35,6 +33,6 @@ public class Position {
 	
 	@Override
 	public String toString() {
-		return String.format("Position: (x: %02d, y: %02d)", this.row, this.column);
+		return String.format("(x: %02d, y: %02d)", this.row, this.column);
 	}
 }
