@@ -12,7 +12,6 @@ public class ChessMatch {
 
 	private Board board;
 	
-	
 	public ChessMatch() {
 		board = new Board(8, 8);
 		initialSetup();
@@ -27,7 +26,6 @@ public class ChessMatch {
 		}
 		return chessPiece;
 	}
-	
 	
 	private void placeNewPiece(char column, int row, ChessPiece piece) {
 		board.placePiece(piece, new ChessPosition(Character.toLowerCase(column), row).toPosition());
@@ -47,6 +45,7 @@ public class ChessMatch {
 			placeNewPiece((char)('a' + i), 2, whitePawn);
 		}
 	}
+	
 	private void initialSetupBlackPiece() {
 		placeNewPiece('A', 8, new Rook(board, Color.BLACK));
 		placeNewPiece('B', 8, new Knight(board, Color.BLACK));
@@ -61,7 +60,6 @@ public class ChessMatch {
 			placeNewPiece((char)('a' + i), 7, blackPawn);
 		}
 	}
-	
 	
 	private void initialSetup() {
 		initialSetupWhitePiece();
