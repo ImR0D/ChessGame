@@ -1,7 +1,6 @@
 package chess;
 
 import boardgame.Board;
-import boardgame.Position;
 import chess.pieces.Bishop;
 import chess.pieces.King;
 import chess.pieces.Knight;
@@ -29,46 +28,44 @@ public class ChessMatch {
 		return chessPiece;
 	}
 	
-	private void initialSetup() {
-		// Rook
-		board.placePiece(new Rook(board, Color.WHITE), new Position(0, 0));
-		board.placePiece(new Rook(board, Color.WHITE), new Position(0, 7));
-		board.placePiece(new Rook(board, Color.BLACK), new Position(7, 0));
-		board.placePiece(new Rook(board, Color.BLACK), new Position(7, 7));
-		
-		// Knight
-		board.placePiece(new Knight(board, Color.WHITE), new Position(0, 1));
-		board.placePiece(new Knight(board, Color.WHITE), new Position(0, 6));
-		board.placePiece(new Knight(board, Color.BLACK), new Position(7, 1));
-		board.placePiece(new Knight(board, Color.BLACK), new Position(7, 6));
-		
-		// Bishop
-		board.placePiece(new Bishop(board, Color.WHITE), new Position(0, 2));
-		board.placePiece(new Bishop(board, Color.WHITE), new Position(0, 5));
-		board.placePiece(new Bishop(board, Color.BLACK), new Position(7, 2));
-		board.placePiece(new Bishop(board, Color.BLACK), new Position(7, 5));
-		
-		// Queen
-		board.placePiece(new Queen(board, Color.WHITE), new Position(0, 3));
-		board.placePiece(new Queen(board, Color.BLACK), new Position(7, 3));
-		
-		// King
-		board.placePiece(new King(board, Color.WHITE), new Position(0, 4));
-		board.placePiece(new King(board, Color.BLACK), new Position(7, 4));
-		
-		Pawn pawn;
-		int pos = 1;
-		for (int i = 1; i <= 2; i++) {
-			if (i == 1) {
-				pawn = new Pawn(board, Color.WHITE);
-			} else {
-				pawn = new Pawn(board, Color.BLACK);
-			}
-			for (int j = 0; j < board.getColumns(); j++) {
-				board.placePiece(pawn, new Position(pos, j));
-			}
-			pos = 6;
+	
+	private void placeNewPiece(char column, int row, ChessPiece piece) {
+		board.placePiece(piece, new ChessPosition(Character.toLowerCase(column), row).toPosition());
+	}
+	
+	private void initialSetupWhitePiece() {
+		placeNewPiece('A', 1, new Rook(board, Color.WHITE));
+		placeNewPiece('B', 1, new Knight(board, Color.WHITE));
+		placeNewPiece('C', 1, new Bishop(board, Color.WHITE));
+		placeNewPiece('D', 1, new Queen(board, Color.WHITE));
+		placeNewPiece('E', 1, new King(board, Color.WHITE));
+		placeNewPiece('F', 1, new Bishop(board, Color.WHITE));
+		placeNewPiece('G', 1, new Knight(board, Color.WHITE));
+		placeNewPiece('H', 1, new Rook(board, Color.WHITE));
+		Pawn whitePawn = new Pawn(board, Color.WHITE);
+		for (int i = 0; i < 8; i++) {
+			placeNewPiece((char)('a' + i), 2, whitePawn);
 		}
+	}
+	private void initialSetupBlackPiece() {
+		placeNewPiece('A', 8, new Rook(board, Color.BLACK));
+		placeNewPiece('B', 8, new Knight(board, Color.BLACK));
+		placeNewPiece('C', 8, new Bishop(board, Color.BLACK));
+		placeNewPiece('D', 8, new Queen(board, Color.BLACK));
+		placeNewPiece('E', 8, new King(board, Color.BLACK));
+		placeNewPiece('F', 8, new Bishop(board, Color.BLACK));
+		placeNewPiece('G', 8, new Knight(board, Color.BLACK));
+		placeNewPiece('H', 8, new Rook(board, Color.BLACK));
+		Pawn blackPawn = new Pawn(board, Color.BLACK);
+		for (int i = 0; i < 8; i++) {
+			placeNewPiece((char)('a' + i), 7, blackPawn);
+		}
+	}
+	
+	
+	private void initialSetup() {
+		initialSetupWhitePiece();
+		initialSetupBlackPiece();
 	}
 	
 }

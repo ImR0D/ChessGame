@@ -28,25 +28,30 @@ public class UI {
 	
 	public static void printBoard(ChessPiece[][] pieces) {
 
-		System.out.println(ANSI_WHITE_BACKGROUND + ANSI_BLACK);
-		System.out.println("                                                             ");
-		System.out.println(" Pieces:                                                     ");
-		System.out.println("  B: Bishop (Bispo) | K: King  (Rei)    | N: Knight (Cavalo) ");
-		System.out.println("  P: Pawn   (Peão)  | Q: Queen (Rainha) | R: Rook   (Torre)  ");
-		System.out.println("                                                             ");
+		System.out.println(ANSI_YELLOW_BACKGROUND + ANSI_BLACK);
+		System.out.println(" ┌───────────────────────────────────────────────────────────┐\t┌──────────────────┐ ");
+		System.out.println(" │                          Pieces                           │\t│     Consider     │ ");
+		System.out.println(" ├───────────────────┬───────────────────┬───────────────────┤\t├──────────────────┤ ");
+		System.out.println(" │ B: Bishop (Bispo) │ K: King  (Rei)    │ N: Knight (Cavalo)│\t│ " 
+		+ ANSI_BLUE_BACKGROUND + ANSI_BLACK + "   " + ANSI_WHITE_BACKGROUND + ANSI_BLACK + " White Piece " 
+		+ ANSI_YELLOW_BACKGROUND + ANSI_BLACK + "\t│ ");
+		System.out.println(" │ P: Pawn   (Peão)  │ Q: Queen (Rainha) │ R: Rook   (Torre) │\t│ " 
+		+ ANSI_RED_BACKGROUND + ANSI_BLACK + "   " + ANSI_BLACK_BACKGROUND + ANSI_WHITE + " Black Piece " 
+		+ ANSI_YELLOW_BACKGROUND + ANSI_BLACK + "\t│ ");
+		System.out.println(" └───────────────────┴───────────────────┴───────────────────┘\t└──────────────────┘ ");
 
 		System.out.println(ANSI_RESET);
-		System.out.println("\t\t  CHESS GAME BOARD\n");
+		System.out.println("\t\t\t\t   CHESS GAME BOARD\n");
 
-		System.out.println("\t   " + ANSI_WHITE + ANSI_BLACK_BACKGROUND + " A   B   C   D   E   F   G   H " + ANSI_RESET + " ");
+		System.out.println("\t\t\t   " + ANSI_WHITE + ANSI_BLACK_BACKGROUND + " A   B   C   D   E   F   G   H " + ANSI_RESET + " ");
 		for (int i = 0; i < pieces.length; i++) {
-			System.out.print("\n\t" + ANSI_WHITE + ANSI_BLACK_BACKGROUND + " " + (8 - i) + " " + ANSI_RESET);
+			System.out.print("\n\t\t\t" + ANSI_WHITE + ANSI_BLACK_BACKGROUND + " " + (8 - i) + " " + ANSI_RESET);
 			for (int j = 0; j < pieces[i].length; j++) {
 				printPiece(pieces[i][j]);
 			}
 			System.out.println("\n");
 		}
-		System.out.println("\t   " + ANSI_WHITE + ANSI_BLACK_BACKGROUND + " A   B   C   D   E   F   G   H " + ANSI_RESET + " ");
+		System.out.println("\t\t\t   " + ANSI_WHITE + ANSI_BLACK_BACKGROUND + " A   B   C   D   E   F   G   H " + ANSI_RESET + " ");
 	}
 
 	private static void printPiece(ChessPiece piece) {

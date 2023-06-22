@@ -15,7 +15,8 @@ public class ChessPosition {
 	}
 	
 	public ChessPosition(char column, int row) {
-		if ( !(column < 'a' || column > 'h') || (row < 1 || row > 8)) {
+		Character col = Character.toLowerCase(column);
+		if ( !(col < 'a' || col > 'h' || row < 1 || row > 8) ) {
 			this.column = column;
 			this.row = row;
 		} else {
@@ -24,11 +25,15 @@ public class ChessPosition {
 	}
 	
 	protected Position toPosition() {
-		return null;
+		return new Position(8 - row, column - 'a');
 	}
 	
 	protected ChessPosition fromPosition(Position position) {
-		return null;
+		return new ChessPosition((char)('a' - position.getColumn()), 8 - position.getRow());
 	}
 	
+	@Override
+	public String toString() {
+		return String.format("(%s, %s)", row, column);
+	}
 }
