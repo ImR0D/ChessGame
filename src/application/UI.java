@@ -29,7 +29,10 @@ public class UI {
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 	
-	
+	public static void clearScreen() {
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+	}
 	public static ChessPosition readChessPosition(Scanner keyboardInput) {
 		try {
 			String input = keyboardInput.nextLine();
@@ -42,6 +45,7 @@ public class UI {
 	}
 	
 	public static void printBoard(ChessPiece[][] pieces) {
+		clearScreen();
 		System.out.println(ANSI_YELLOW_BACKGROUND + ANSI_BLACK);
 		System.out.println(" ┌───────────────────────────────────────────────────────────┐\t┌──────────────────┐ ");
 		System.out.println(" │                          Pieces                           │\t│     Consider     │ ");
@@ -61,16 +65,51 @@ public class UI {
 		for (int i = 0; i < pieces.length; i++) {
 			System.out.print("\n\t\t\t" + ANSI_WHITE + ANSI_BLACK_BACKGROUND + " " + (8 - i) + " " + ANSI_RESET);
 			for (int j = 0; j < pieces[i].length; j++) {
-				printPiece(pieces[i][j]);
+				printPiece(pieces[i][j], false);
 			}
 			System.out.println("\n");
 		}
 		System.out.println("\t\t\t   " + ANSI_WHITE + ANSI_BLACK_BACKGROUND + " A   B   C   D   E   F   G   H " + ANSI_RESET + " ");
 	}
 
-	private static void printPiece(ChessPiece piece) {
+	public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
+		clearScreen();
+		System.out.println(ANSI_YELLOW_BACKGROUND + ANSI_BLACK);
+		System.out.println(" ┌───────────────────────────────────────────────────────────┐\t┌──────────────────┐ ");
+		System.out.println(" │                          Pieces                           │\t│     Consider     │ ");
+		System.out.println(" ├───────────────────┬───────────────────┬───────────────────┤\t├──────────────────┤ ");
+		System.out.println(" │ B: Bishop (Bispo) │ K: King  (Rei)    │ N: Knight (Cavalo)│\t│ " 
+		+ ANSI_BLUE_BACKGROUND + ANSI_BLACK + "   " + ANSI_WHITE_BACKGROUND + ANSI_BLACK + " White Piece " 
+		+ ANSI_YELLOW_BACKGROUND + ANSI_BLACK + "\t│ ");
+		System.out.println(" │ P: Pawn   (Peão)  │ Q: Queen (Rainha) │ R: Rook   (Torre) │\t│ " 
+		+ ANSI_RED_BACKGROUND + ANSI_BLACK + "   " + ANSI_BLACK_BACKGROUND + ANSI_WHITE + " Black Piece " 
+		+ ANSI_YELLOW_BACKGROUND + ANSI_BLACK + "\t│ ");
+		System.out.println(" └───────────────────┴───────────────────┴───────────────────┘\t└──────────────────┘ ");
+
+		System.out.println(ANSI_RESET);
+		System.out.println("\t\t\t\t   CHESS GAME BOARD\n");
+
+		System.out.println("\t\t\t   " + ANSI_WHITE + ANSI_BLACK_BACKGROUND + " A   B   C   D   E   F   G   H " + ANSI_RESET + " ");
+		for (int i = 0; i < pieces.length; i++) {
+			System.out.print("\n\t\t\t" + ANSI_WHITE + ANSI_BLACK_BACKGROUND + " " + (8 - i) + " " + ANSI_RESET);
+			for (int j = 0; j < pieces[i].length; j++) {
+				printPiece(pieces[i][j], possibleMoves[i][j]);
+			}
+			System.out.println("\n");
+		}
+		System.out.println("\t\t\t   " + ANSI_WHITE + ANSI_BLACK_BACKGROUND + " A   B   C   D   E   F   G   H " + ANSI_RESET + " ");
+	}
+	
+	private static void printPiece(ChessPiece piece, boolean backgroundColor) {
+		
+		if (backgroundColor) {
+			System.out.print(ANSI_PURPLE_BACKGROUND);
+		} else {
+			System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK);
+		}
+		
 		if (piece == null) {
-			System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK + " ▫ " + ANSI_RESET);
+			System.out.print(" ▫ " + ANSI_RESET);
 		} else {
 			if (piece.getColor() == Color.WHITE) {
 				System.out.print(ANSI_BLUE_BACKGROUND + ANSI_WHITE + String.format(" %s ", piece) + ANSI_RESET);

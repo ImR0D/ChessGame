@@ -14,17 +14,22 @@ public abstract class Piece {
 		return this.board;
 	}
 	
-	public Piece[][] possibleMoves() {
-		return new Piece[0][0]; // not deployed yet!
-	}
+	public abstract boolean[][] possibleMoves();
 	
 	public boolean possibleMove(Position position) {
-		return false;
+		return possibleMoves()[position.getRow()][position.getColumn()];
 	}
 	
 	public boolean isThereAnyPossibleMove() {
+		boolean[][] moves = possibleMoves();
+		for (int i = 0; i < moves.length; i++) {
+			for (int j = 0; j < moves[i].length; j++ ) {
+				if (moves[i][j]) {
+					return true;
+				}
+			}
+		}
 		return false;
 	}
-	
 	
 }
