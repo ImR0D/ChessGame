@@ -72,8 +72,8 @@ public class UI {
 		System.out.println("\t\t\t   " + ANSI_WHITE + ANSI_BLACK_BACKGROUND + " A   B   C   D   E   F   G   H " + ANSI_RESET + " ");
 	}
 
-	public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
-		clearScreen();
+	
+	private static void printDisclaimer() {
 		System.out.println(ANSI_YELLOW_BACKGROUND + ANSI_BLACK);
 		System.out.println(" ┌───────────────────────────────────────────────────────────┐\t┌──────────────────┐ ");
 		System.out.println(" │                          Pieces                           │\t│     Consider     │ ");
@@ -85,10 +85,13 @@ public class UI {
 		+ ANSI_RED_BACKGROUND + ANSI_BLACK + "   " + ANSI_BLACK_BACKGROUND + ANSI_WHITE + " Black Piece " 
 		+ ANSI_YELLOW_BACKGROUND + ANSI_BLACK + "\t│ ");
 		System.out.println(" └───────────────────┴───────────────────┴───────────────────┘\t└──────────────────┘ ");
-
+	}
+	
+	public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
+		clearScreen();
+		printDisclaimer();
 		System.out.println(ANSI_RESET);
 		System.out.println("\t\t\t\t   CHESS GAME BOARD\n");
-
 		System.out.println("\t\t\t   " + ANSI_WHITE + ANSI_BLACK_BACKGROUND + " A   B   C   D   E   F   G   H " + ANSI_RESET + " ");
 		for (int i = 0; i < pieces.length; i++) {
 			System.out.print("\n\t\t\t" + ANSI_WHITE + ANSI_BLACK_BACKGROUND + " " + (8 - i) + " " + ANSI_RESET);
@@ -101,23 +104,28 @@ public class UI {
 	}
 	
 	private static void printPiece(ChessPiece piece, boolean backgroundColor) {
-		
 		if (backgroundColor) {
 			System.out.print(ANSI_PURPLE_BACKGROUND);
 		} else {
 			System.out.print(ANSI_WHITE_BACKGROUND + ANSI_BLACK);
-		}
-		
+		}	
 		if (piece == null) {
 			System.out.print(" ▫ " + ANSI_RESET);
 		} else {
 			if (piece.getColor() == Color.WHITE) {
-				System.out.print(ANSI_BLUE_BACKGROUND + ANSI_WHITE + String.format(" %s ", piece) + ANSI_RESET);
+				if (backgroundColor) {
+					System.out.print(ANSI_YELLOW_BACKGROUND + ANSI_RED + String.format(" %s ", piece) + ANSI_RESET);
+				} else {
+					System.out.print(ANSI_BLUE_BACKGROUND + ANSI_WHITE + String.format(" %s ", piece) + ANSI_RESET);
+				}
 			} else {
-				System.out.print(ANSI_RED_BACKGROUND + ANSI_WHITE + String.format(" %s ", piece) + ANSI_RESET);
+				if (backgroundColor) {
+					System.out.print(ANSI_YELLOW_BACKGROUND + ANSI_BLUE + String.format(" %s ", piece) + ANSI_RESET);
+				} else {
+					System.out.print(ANSI_RED_BACKGROUND + ANSI_WHITE + String.format(" %s ", piece) + ANSI_RESET);
+				}
 			}
 		}
 		System.out.print(" ");
 	}
-
 }

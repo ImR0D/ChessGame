@@ -79,10 +79,10 @@ public class ChessMatch {
 		placeNewPiece('F', 1, new Bishop(board, Color.WHITE));
 		placeNewPiece('G', 1, new Knight(board, Color.WHITE));
 		placeNewPiece('H', 1, new Rook(board, Color.WHITE));
-		Pawn whitePawn = new Pawn(board, Color.WHITE);
-		for (int i = 0; i < 8; i++) {
-			placeNewPiece((char)('a' + i), 2, whitePawn);
-		}
+//		Pawn whitePawn = new Pawn(board, Color.WHITE);
+//		for (int i = 0; i < 8; i++) {
+//			placeNewPiece((char)('a' + i), 2, whitePawn);
+//		}
 	}
 	
 	private void initialSetupBlackPiece() {
@@ -94,10 +94,10 @@ public class ChessMatch {
 		placeNewPiece('F', 8, new Bishop(board, Color.BLACK));
 		placeNewPiece('G', 8, new Knight(board, Color.BLACK));
 		placeNewPiece('H', 8, new Rook(board, Color.BLACK));
-		Pawn blackPawn = new Pawn(board, Color.BLACK);
-		for (int i = 0; i < 8; i++) {
-			placeNewPiece((char)('a' + i), 7, blackPawn);
-		}
+//		Pawn blackPawn = new Pawn(board, Color.BLACK);
+////		for (int i = 0; i < 8; i++) {
+////			placeNewPiece((char)('a' + i), 7, blackPawn);
+////		}
 	}
 	
 	private void initialSetup() {
